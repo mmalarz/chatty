@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load materializecss %}
+{% block title %}Settings{% endblock %}
+
+{% block body_middle %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="card-panel blue darken-2">
+            <span class="white-text">{{ message }}</span>
+            </div>
+            <br>
+        {% endfor %}
+    {% endif %}
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">General information</span>
+            <br>
+            <form method="post" id="lol">
+                {% csrf_token %}
+                {{ user_form|materializecss }}
+                <br>
+                <button type="submit" class="btn">Update profile</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">Passwords</span>
+            <br>
+            <form method="post">
+                {% csrf_token %}
+                {{ password_form|materializecss }}
+                <br>
+                <button type="submit" class="btn">Update password</button>
+            </form>
+        </div>
+    </div>
+    <br>
+{% endblock %}
+{% block body_right %}
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ chat.category }}
+{% endblock %}
+
+{% block body_left %}
+    {% for chat in chats %}
+        <div class="card hoverable">
+            <div class="card-content">
+                <p>{{ chat.category }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url "chat:room" chat.category %}">Join chat</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block body_middle %}
+    <ul id="chat-window">
+        {% for msg in messages reversed %}
+            {% if msg.user == request.user %}
+                <li class="chat-user-message">{{ msg }}</li>
+            {% else %}
+                <p class="message-username">{{ msg.user.first_name }} {{ msg.user.last_name }}</p>
+                <li class="chat-others-message">{{ msg }}</li>
+            {% endif %}
+            <div style="clear: both;"></div>
+        {% endfor %}
+    </ul>
+
+    <br/>
+    <form id="chat-form">
+        {% csrf_token %}
+        <label for="chat-message-input">Message</label>
+        <input id="chat-message-input" type="text" size="100" tabindex="-1"/>
+        <button class="btn" id="chat-message-submit" type="submit">Send</button>
+    </form>
+{% endblock %}
+
+{% block body_right %}
+    <div class="collection" id="user-list">
+        <!-- user list updates here -->
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        let roomName = {{ room_name_json }};
+        let activeUsername = {{ user_json }};
+    </script>
+    <script src="{% static "js/chat.js" %}"></script>
+{% endblock %}

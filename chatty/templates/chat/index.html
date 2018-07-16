@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Chatty
+{% endblock %}
+
+{% block body_left %}
+    {% for chat in chats %}
+        <div class="card hoverable">
+            <div class="card-content">
+                <p>{{ chat.category }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url "chat:room" chat.category %}">Join chat</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block body_middle %}
+    <h4></h4>
+    <p></p>
+
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">Welcome to Chatty!</span>
+            <p>All available chats are displayed on the left side. You can join wherever you want.</p>
+            <p>Active users in current chat are displayed on the right side after joining it.</p>
+            <br>
+            <p>Join <a href="{% url "chat:room" "General" %}">General</a> room to get started!</p>
+        </div>
+    </div>
+
+
+{% endblock %}

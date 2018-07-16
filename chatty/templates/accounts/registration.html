@@ -1,0 +1,13 @@
+{% extends "not_logged_in_base.html" %}
+{% load materializecss %}
+{% block title %}Registration{% endblock %}
+
+{% block body_middle %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form|materializecss }}
+        <div class="center-align">
+            <button type="submit" class="btn btn-large ">Register</button>
+        </div>
+    </form>
+{% endblock %}

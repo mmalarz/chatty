@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Chatty is a real time chatting website">
+    <meta name="keywords" content="chatting, chat, categories, real time, conversation">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="Shortcut icon" href="{% static "images/icon.png" %}">
+    <!-- Custom materialize css -->
+    <link rel="stylesheet" type="text/css" href="{% static "css/materialize.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{% url "startpage" %}" class="brand-logo logo"><i class="material-icons">question_answer</i>Chatty</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{% url "accounts:login" %}">Login</a></li>
+                <li><a href="{% url "accounts:registration" %}">Registration</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="{% url "accounts:login" %}">Login</a></li>
+    <li><a href="{% url "accounts:registration" %}">Registration</a></li>
+</ul>
+
+<div class="row">
+    <br>
+    <div class="col l4 m2">
+        {% block body_left %}
+
+        {% endblock %}
+    </div>
+    <div class="col l4 m8 s12" >
+        {% block body_middle %}
+        {% endblock %}
+    </div>
+    <div class="col l4 m2">
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script src="{% static "js/sidenav.js" %}"></script>
+
+{% block scripts %}
+
+{% endblock %}
+
+</body>
+</html>
